@@ -51,4 +51,6 @@ public class Encode implements Function{
             return new Result(ResultCode.ERROR, new ApplicationException("Encode operation finish with exception ", e));
         }
         return new Result(ResultCode.OK);}
+
+    //test changes
 }
