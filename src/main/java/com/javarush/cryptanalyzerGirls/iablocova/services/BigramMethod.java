@@ -1,4 +1,6 @@
 package com.javarush.cryptanalyzerGirls.iablocova.services;
-//Лиза
-public class BruteForce {
+
+
+//Даша
+public class BigramMethod {
 }

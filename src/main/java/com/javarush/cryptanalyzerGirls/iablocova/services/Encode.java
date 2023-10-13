@@ -6,7 +6,7 @@ import com.javarush.cryptanalyzerGirls.iablocova.constants.CryptoAlphabet;
 import com.javarush.cryptanalyzerGirls.iablocova.entity.Result;
 import com.javarush.cryptanalyzerGirls.iablocova.exception.ApplicationException;
 import com.javarush.cryptanalyzerGirls.iablocova.repository.ResultCode;
-
+//Ева
 import static com.javarush.cryptanalyzerGirls.iablocova.constants.ApplicationCompletionConstants.EXCEPTION;
 
 public class Encode implements Function{
