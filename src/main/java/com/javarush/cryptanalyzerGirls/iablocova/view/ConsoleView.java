@@ -1,28 +1,7 @@
-//package com.javarush.cryptanalyzerGirls.iablocova.view;
-//
-//import com.javarush.cryptanalyzerGirls.iablocova.entity.Result;
-//
-//public class ConsoleView implements View{
-//    @Override
-//    public String[] getParameters() {
-//        return new String[0];
-//    }
-//
-//    @Override
-//    public Result printResult(Result result) {
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean repeat() {
-//        return false;
-//    }
-//}
-//
-
 package com.javarush.cryptanalyzerGirls.iablocova.view;
 
 import com.javarush.cryptanalyzerGirls.iablocova.entity.Result;
+import com.javarush.cryptanalyzerGirls.iablocova.view.View;
 import org.w3c.dom.ls.LSOutput;
 
 import java.util.Arrays;
@@ -39,33 +18,32 @@ public class ConsoleView implements View {
 
     @Override
     public String[] getParameters() {
-        int k = 5;
+        int k = 4;
         String[] parameters = new String[k];
         boolean t = true;
-        Scanner scanner2 = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         while (t) {
             System.out.println("Выберите режим, который вы ходите использовать");
             System.out.println("1 - зашифровать файл");
-            System.out.println("2 - расшифровать файл (с ключом)");
+            System.out.println("2 - расшифровать файл");
             System.out.println("3 - BruteForce");
             System.out.println("4 - Статистический анализ");
-            System.out.println("5 - BigramMethod");
-            parameters[0] = scanner2.nextLine();
+            parameters[0] = scanner.nextLine();
 
             switch (parameters[0]) {
                 case "1":
                     System.out.println("Введите путь файла, который вы хотите зашифровать или нажмите Enter для выбора файла по умолчанию (input.txt)");
                     t = false;
-                    parameters[1] = scanner2.nextLine();
+                    parameters[1] = scanner.nextLine();
 //                    scanner.close();
-                    if (parameters[1].isEmpty()) parameters[1] = "input.txt";
+                    if (parameters[1].isEmpty()) parameters[1] = "/Users/eva/Documents/cryptanalyzer111/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/input.txt";
                     break;
-                case "2", "3", "4", "5":
+                case "2", "3", "4":
                     System.out.println("Введите путь файла, который вы хотите расшифровать или нажмите Enter для выбора файла по умолчанию (encoded.txt)");
                     t = false;
-                    parameters[1] = scanner2.nextLine();
+                    parameters[1] = scanner.nextLine();
 //                    scanner.close();
-                    if (parameters[1].isEmpty()) parameters[1] = "encoded.txt";
+                    if (parameters[1].isEmpty()) parameters[1] = "/Users/eva/Documents/cryptanalyzer111/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/encoded.txt";
                     break;
                 default:
                     System.out.println("Нет такого режима. Попробуйте ещё раз");
@@ -78,7 +56,7 @@ public class ConsoleView implements View {
                 switch (parameters[0]) {
                     case "1":
                         System.out.println("Введите ключ для шифровки или нажмите Enter для случайного генерирования ключа");
-                        parameters[2] = scanner2.nextLine();
+                        parameters[2] = scanner.nextLine();
 
                         if (parameters[2].isEmpty()) {
                             Random random = new Random();
@@ -87,43 +65,16 @@ public class ConsoleView implements View {
                         }
 
                         System.out.println("Выберите в какой файл записать результат или нажмите Enter для выбора файла по умолчанию (encoded.txt)");
-                        parameters[3] = scanner2.nextLine();
-                        if (parameters[3].isEmpty()) parameters[3] = "encoded.txt";
-
-                        System.out.println("Будет ли этот файл использован для расшифровки статистическим анализом?");
-                        System.out.println("1 - да");
-                        System.out.println("2 - нет");
-
-                        boolean n = true;
-                        while (n) {
-                            int answer = scanner2.nextInt();
-
-                            try {
-                                switch (answer) {
-                                    case 1:
-                                        parameters[4] = "1";
-                                        n= false;
-                                        break;
-                                    case 2:
-                                        parameters[4] = "0";
-                                        n= false;
-                                        break;
-                                    default:
-                                        System.out.println("Нет такого ответа. Попробуйте ещё раз");
-                                }
-                            } catch (NumberFormatException e) {
-                            }
-                        }
-                        t = false; //пока не введут число не закончится цикл
+                        parameters[3] = scanner.nextLine();
+                        if (parameters[3].isEmpty()) parameters[3] = "/Users/eva/Documents/cryptanalyzer111/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/encoded.txt";
                         break;
                     case "2":
                         System.out.println("Введите ключ для расшифровки");
-                        parameters[2] = scanner2.nextLine();
+                        parameters[2] = scanner.nextLine();
                         System.out.println("Выберите в какой файл записать результат или нажмите Enter для выбора файла по умолчанию (output.txt)");
-                        parameters[3] = scanner2.nextLine();
-                        if (parameters[3].isEmpty()) parameters[3] = "output.txt";
+                        parameters[3] = scanner.nextLine();
+                        if (parameters[3].isEmpty()) parameters[3] = "/Users/eva/Documents/cryptanalyzer111/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/output.txt";
                         break;
-                        //case 3 4 5
                     default:
                         break;
                 }
@@ -132,7 +83,7 @@ public class ConsoleView implements View {
             }
         }
 
-//        scanner.close();
+        //  scanner.close();
         return parameters;
     }
 
@@ -154,13 +105,17 @@ public class ConsoleView implements View {
             System.out.println("2 - остановить");
 
             int k = 0;
+//            boolean t1 = true;
+//            while (t1) {
             Scanner scanner1 = new Scanner(System.in);
             if (scanner1.hasNextInt()) {
                 k = scanner1.nextInt();
+                // t1 = false;
             } else {
                 System.out.println("Введено не целое число.");
             }
-            scanner1.close();
+//                scanner1.close();
+            //}
 
             switch (k) {
                 case 1:
@@ -176,6 +131,6 @@ public class ConsoleView implements View {
             }
         }
 
-        return re;//никогда не выполниться
+        return re;//никогда не выполниться};
     }
 }
