@@ -9,48 +9,52 @@ import com.javarush.cryptanalyzerGirls.iablocova.repository.ResultCode;
 //Ева
 import static com.javarush.cryptanalyzerGirls.iablocova.constants.ApplicationCompletionConstants.EXCEPTION;
 
-public class Encode implements Function{
+public class Encode implements Function {
     @Override
-    public Result execute (String[] parameters){
+    public Result execute(String[] parameters) {
+        try{
+        File file1 = new File(parameters[1]);
+        if (!file1.exists()) { file1.createNewFile();}
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(parameters[1]))) {
-            StringBuilder encryptedText = new StringBuilder();
+        String textForEncode = readTextFromFile(file1);
+        int  keyForEncode = Integer.parseInt (parameters[2]);
+        String encodedText = encryptText (textForEncode, keyForEncode);
 
-            int  keyForEncode = Integer.parseInt (parameters[2]);
-            int character;
-            while ((character = reader.read()) != -1) {
-                int currentIndex = CryptoAlphabet.ALPHABET.indexOf((char)character);
-                char encryptedChar = (char) character;
-
-                if (currentIndex != -1) {// если этот символ есть в нашем алфавите
-                    if (currentIndex + keyForEncode < CryptoAlphabet.lengthOfAlphabet) {
-                        encryptedChar = CryptoAlphabet.ALPHABET.charAt(currentIndex + keyForEncode);
-                    } else if (currentIndex + keyForEncode >= CryptoAlphabet.ALPHABET.length())
-                        encryptedChar = CryptoAlphabet.ALPHABET.charAt(currentIndex + keyForEncode - CryptoAlphabet.lengthOfAlphabet);
-                }
-
-                encryptedText.append(encryptedChar);
-            }
-//        return null;
-
-            try {
-                File file = new File(parameters[3]);
-                if (!file.exists()) {
-                    file.createNewFile();
-                }
-
-                FileWriter writer = new FileWriter(file, false);
-                writer.write(encryptedText.toString());
-                writer.write(System.lineSeparator());
-                writer.close();
-
-            } catch (IOException e) {
-                System.out.println(EXCEPTION + e.getMessage());
-            }
-        } catch (Exception e){
-            return new Result(ResultCode.ERROR, new ApplicationException("Encode operation finish with exception ", e));
+        File file2 = new File(parameters[3]);
+        if (!file2.exists()) { file2.createNewFile();}
+        rewriteTextToFile (file2, encodedText);
         }
-        return new Result(ResultCode.OK);}
+        catch (IOException e){
+            System.out.println(EXCEPTION + e.getMessage());
+            return new Result(ResultCode.ERROR);
+        }
 
-    //test changes
+        return new Result(ResultCode.OK);
+    }
+
+
+    public static char encryptChar(char character, int  keyForEncode) {
+
+        int currentIndex = CryptoAlphabet.ALPHABET.indexOf(character);
+        char encryptedChar = character;
+
+        if (currentIndex != -1) {// если этот символ есть в нашем алфавите
+            if (currentIndex + keyForEncode < CryptoAlphabet.lengthOfAlphabet) {
+                encryptedChar = CryptoAlphabet.ALPHABET.charAt(currentIndex + keyForEncode);
+            } else if (currentIndex + keyForEncode >= CryptoAlphabet.ALPHABET.length())
+                encryptedChar = CryptoAlphabet.ALPHABET.charAt(currentIndex + keyForEncode - CryptoAlphabet.lengthOfAlphabet);
+        }
+
+        return encryptedChar;
+    }
+
+    static String encryptText (String textForEncode,int  keyForEncode) {
+        StringBuilder encryptedText = new StringBuilder();
+
+        for (int i = 0; i < textForEncode.length(); i++) {
+            encryptedText.append(encryptChar(textForEncode.charAt(i), keyForEncode));
+        }
+
+        return encryptedText.toString();
+    }
 }

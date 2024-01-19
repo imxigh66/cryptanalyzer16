@@ -13,7 +13,12 @@ public enum FunctionCode {
      *
      * преобразование какой-то циферки, которую пользователь введёт преобразовать в джавовский класс
      */
-    ENCODE (new Encode()), DECODE (new Decode()), UNSUPPORTED_FUNCTION (new UnsupportedFunction()), BRUTE_FORCE (new BruteForce());
+    ENCODE (new Encode()),
+    DECODE (new Decode()),
+    BRUTE_FORCE (new BruteForce()),
+    BIGRAM_METHOD (new BigramMethod()),
+    STATISTICAL_ANALISIS(new StatisticalAnalysis()),
+    UNSUPPORTED_FUNCTION (new UnsupportedFunction());
 
     private Function function;
     FunctionCode (Function function){ this.function = function;}

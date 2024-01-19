@@ -1,4 +1,4 @@
-package com.javarush.cryptanalyzer.iablocova.app;
+package com.javarush.cryptanalyzerGirls.iablocova.app;
 
 import com.javarush.cryptanalyzerGirls.iablocova.controller.MainController;
 import com.javarush.cryptanalyzerGirls.iablocova.entity.Result;
@@ -30,6 +30,8 @@ public class Application {
             case "1" -> FunctionCode.valueOf (ENCODE).getFunction();
             case "2" -> FunctionCode.valueOf (DECODE).getFunction();
             case "3" -> FunctionCode.valueOf(BRUTE_FORCE).getFunction();
+            case "4" -> FunctionCode.valueOf(STATISTICAL_ANALISIS).getFunction();
+            case "5" -> FunctionCode.valueOf(BIGRAM_METHOD).getFunction();
             default -> FunctionCode.valueOf (UNSUPPORTED_FUNCTION).getFunction();
         };
     }
