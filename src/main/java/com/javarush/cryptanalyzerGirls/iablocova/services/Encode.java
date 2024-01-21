@@ -17,6 +17,11 @@ public class Encode implements Function {
         if (!file1.exists()) { file1.createNewFile();}
 
         String textForEncode = readTextFromFile(file1);
+
+        if (parameters[4] == "1") { //if we will use Statistical analisis
+            textForEncode.toLowerCase();
+        }
+
         int  keyForEncode = Integer.parseInt (parameters[2]);
         String encodedText = encryptText (textForEncode, keyForEncode);
 
@@ -56,5 +61,17 @@ public class Encode implements Function {
         }
 
         return encryptedText.toString();
+    }
+
+    public void convertFileToLowerCase(File inputFile, File outputFile) {
+        try {
+            String content = readTextFromFile(inputFile);
+            String convertedContent = content.toLowerCase();
+            rewriteTextToFile(outputFile, convertedContent);
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

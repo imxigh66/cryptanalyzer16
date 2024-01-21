@@ -14,7 +14,7 @@ public class ConsoleView implements View {
 
     @Override
     public String[] getParameters() {
-        int k = 4;
+        int k = 5;
         String[] parameters = new String[k];
         boolean t = true;
         Scanner scanner = new Scanner(System.in);
@@ -29,14 +29,19 @@ public class ConsoleView implements View {
 
             switch (parameters[0]) {
                 case "1":
-                    System.out.println("Введите путь файла, который вы хотите зашифровать или нажмите Enter для выбора файла по умолчанию (input.txt)");
                     t = false;
+                    System.out.println("Введите путь файла, который вы хотите зашифровать или нажмите Enter для выбора файла по умолчанию (input.txt)");
                     parameters[1] = scanner.nextLine();
                     if (parameters[1].isEmpty()) parameters[1] = input;
+                    System.out.println("Будет ли файл использован для дешифровки статистическим анализом?");
+                    System.out.println("1 - да");
+                    System.out.println("2 - нет");
+                    if (scanner.nextLine() == "2") parameters[4] = "0";
+                    else parameters[4] = "1";
                     break;
                 case "2", "3", "4", "5":
-                    System.out.println("Введите путь файла, который вы хотите расшифровать или нажмите Enter для выбора файла по умолчанию (encoded.txt)");
                     t = false;
+                    System.out.println("Введите путь файла, который вы хотите расшифровать или нажмите Enter для выбора файла по умолчанию (encoded.txt)");
                     parameters[1] = scanner.nextLine();
                     if (parameters[1].isEmpty()) parameters[1] = encoded;
                     break;
@@ -85,7 +90,7 @@ public class ConsoleView implements View {
                         if (parameters[3].isEmpty()) parameters[3] = output;
                         break;
                     case "5"://5 - Bigram Method
-                        parameters[2] = dictionaryBigram;
+                        parameters[2] = bigrams;
                         System.out.println("Выберите в какой файл записать результат или нажмите Enter для выбора файла по умолчанию (output.txt)");
                         parameters[3] = scanner.nextLine();
                         if (parameters[3].isEmpty()) parameters[3] = output;
