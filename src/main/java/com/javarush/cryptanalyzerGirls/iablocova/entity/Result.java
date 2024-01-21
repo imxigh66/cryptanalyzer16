@@ -21,4 +21,10 @@ public class Result {
     public ApplicationException getApplicationException() {
         return applicationException;
     }
+    public String getErrorMessage() {
+        if (applicationException != null) {
+            return applicationException.getMessage();
+        }
+        return "No error"; // Или другое сообщение об отсутствии ошибки
+        }
 }
