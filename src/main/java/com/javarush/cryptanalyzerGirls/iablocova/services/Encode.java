@@ -18,10 +18,6 @@ public class Encode implements Function {
 
         String textForEncode = readTextFromFile(file1);
 
-        if (parameters[4] == "1") { //if we will use Statistical analisis
-            textForEncode.toLowerCase();
-        }
-
         int  keyForEncode = Integer.parseInt (parameters[2]);
         String encodedText = encryptText (textForEncode, keyForEncode);
 

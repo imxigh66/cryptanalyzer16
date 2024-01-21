@@ -1,4 +1,5 @@
 package com.javarush.cryptanalyzerGirls.iablocova.view;
+import com.javarush.cryptanalyzerGirls.iablocova.Swing;
 import com.javarush.cryptanalyzerGirls.iablocova.repository.ResultCode;
 import com.javarush.cryptanalyzerGirls.iablocova.entity.Result;
 import javax.swing.JTextField;
@@ -13,7 +14,7 @@ public class GUIView implements View{
     private JFrame frame;// Главное окно приложения
     // Конструктор
     public GUIView(){
-
+         new Swing();
     }
 
     public GUIView(JTextField encryptField, JTextField decryptField, JTextField keyField, JTextField statusField, JTextField dictionaryField,JFrame frame) {
@@ -61,14 +62,17 @@ public class GUIView implements View{
             dictionaryPath = "0"; // Для остальных режимов
         }
 
+
+        int i = 5;
+        String[] parameters = new String[5];
+        parameters[0] = currentMode;
+        parameters[1] = sourceFilePath;
+        parameters[2] = key;
+        parameters[3] = targetFilePath;
+        parameters[4] = dictionaryPath;
+
         // Возвращаем массив параметров
-        return new String[] {
-                currentMode, // Текущий режим работы
-                sourceFilePath, // Путь к исходному файлу
-                key, // Ключ
-                targetFilePath, // Путь к целевому файлу
-                dictionaryPath  // Путь к словарю
-        };
+        return parameters;
     }
 
     @Override

@@ -17,6 +17,7 @@ public enum FunctionCode {
     DECODE (new Decode()),
     BRUTE_FORCE (new BruteForce()),
     BIGRAM_METHOD (new BigramMethod()),
+    ENCODE_FOR_STATISTICAL_ANALYSIS (new EncodeForStatisticalAnalysis()),
     STATISTICAL_ANALISIS(new StatisticalAnalysis()),
     UNSUPPORTED_FUNCTION (new UnsupportedFunction());
 
