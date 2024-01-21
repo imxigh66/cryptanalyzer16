@@ -35,17 +35,6 @@ public class EncodeForStatisticalAnalysis implements Function{
         }
         return new Result(ResultCode.OK);
     }
-    public void convertFileToLowerCase(File inputFile, File outputFile) {
-        try {
-            String content = readTextFromFile(inputFile);
-            String convertedContent = content.toLowerCase();
-            rewriteTextToFile(outputFile, convertedContent);
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
     public static char encryptChar(char ch, int key) {
         int index = ALPHABET_FOR_STATISTICAL_ANALYSIS.indexOf(ch);
         if (index != -1) {

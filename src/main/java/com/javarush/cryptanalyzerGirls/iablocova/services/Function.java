@@ -32,4 +32,16 @@ public interface Function {
             writer.write(content);
         }
     }
+
+    default void convertFileToLowerCase(File inputFile, File outputFile) {
+        try {
+            String content = readTextFromFile(inputFile);
+            String convertedContent = content.toLowerCase();
+            rewriteTextToFile(outputFile, convertedContent);
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

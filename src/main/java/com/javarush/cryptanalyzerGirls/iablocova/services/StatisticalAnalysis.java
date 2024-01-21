@@ -13,6 +13,13 @@ public class StatisticalAnalysis implements Function {
     public Result execute(String[] parameters) {
 
         try {
+            File fileDictionary = new File(parameters[2]);
+            if (!fileDictionary.exists()) {
+                fileDictionary.createNewFile();
+            }
+
+        convertFileToLowerCase (fileDictionary, fileDictionary);
+
             File encodedFile = new File(parameters[1]);
             if (!encodedFile.exists()) {
                 encodedFile.createNewFile();
