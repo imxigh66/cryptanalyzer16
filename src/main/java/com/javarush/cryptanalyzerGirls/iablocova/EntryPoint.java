@@ -11,7 +11,7 @@ import com.javarush.cryptanalyzerGirls.iablocova.view.View;
 public class EntryPoint {
     public static void main (String[] args){
             //спрашивать в начале какой view -> создаем view
-            View view = new ConsoleView();
+            View view = new GUIView();
             MainController mainController = new MainController(view);
             Application application = new Application(mainController);
 

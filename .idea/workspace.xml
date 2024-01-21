@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff7352c2-6bb6-4a5f-a75b-cea343b42d0e" name="Changes" comment="version 4. BigramMethod, StatisticalAnalysis">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/LoginWindow.java" afterDir="false" />
+    <list default="true" id="ff7352c2-6bb6-4a5f-a75b-cea343b42d0e" name="Changes" comment="version 5. GUI View">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/tmpFileForBruteForce.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/EntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/EntryPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/Swing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/Swing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/constants/Paths.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/constants/Paths.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/encoded.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/encoded.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/entity/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/entity/Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/output.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/services/BruteForce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/services/BruteForce.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/view/GUIView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/view/GUIView.java" afterDir="false" />
@@ -122,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705831470856</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="version 5. GUI View">
+      <option name="closed" value="true" />
+      <created>1705843625094</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1705843625096</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -132,6 +139,18 @@
     <MESSAGE value="version 2" />
     <MESSAGE value="version 3. ConsoleView. Encode. Decode" />
     <MESSAGE value="version 4. BigramMethod, StatisticalAnalysis" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 4. BigramMethod, StatisticalAnalysis" />
+    <MESSAGE value="version 5. GUI View" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 5. GUI View" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/EntryPoint.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

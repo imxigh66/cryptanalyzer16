@@ -1,40 +1,5 @@
 package com.javarush.cryptanalyzerGirls.iablocova;
 
-//package com.javarush.cryptanalyzer.iablocova;
-//
-//import javax.swing.*;
-//import java.awt.*;
-//
-//public class Swing {
-//
-//    public static void main (String[] args){
-//
-//        JFrame frame = new JFrame("FrameName");
-//        JButton button = new JButton("ButtonName");
-//        JTextField textField = new JTextField("TextInsideField");
-//        //ScrollBar
-//        //panel
-//        //list
-//        //label - подписать
-//        //comboBox - like type of list
-//        //GUI form
-//
-//        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        frame.setLocationRelativeTo(null);
-//
-//        button.setBounds(40, 90, 85, 20);
-//        textField.setBounds(50, 100, 200, 30);
-//
-//        button.setBackground(Color.ORANGE);
-//
-//        frame.add(button);
-//        frame.add(textField);
-//        frame.setSize(300,300);
-//        frame.setLayout(null);
-//        frame.setVisible(true);
-//    }
-//}
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -48,6 +13,8 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FilenameFilter;
+
+import com.javarush.cryptanalyzerGirls.iablocova.LoginWindow;
 import com.javarush.cryptanalyzerGirls.iablocova.view.GUIView;
 import com.javarush.cryptanalyzerGirls.iablocova.services.Encode;
 import com.javarush.cryptanalyzerGirls.iablocova.services.Decode;
@@ -68,7 +35,8 @@ public class Swing {
     private static JTextField dictionaryField;
     private static String currentFilePath;
     private static JFrame frame;
-    public static void Swing() {
+
+    public Swing () {
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception e) {
@@ -87,7 +55,7 @@ public class Swing {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                GUIView guiView = new GUIView(encryptField, keyField, statusField, dictionaryField,frame);
+                GUIView guiView = new GUIView(encryptField, decryptField, keyField, statusField, dictionaryField, frame);
                 if (guiView.repeat()) {
                     // Не закрываем окно, если пользователь хочет повторить операцию
                     frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -114,7 +82,6 @@ public class Swing {
         panel.setBackground(Color.DARK_GRAY);
 
 
-
         // Панели для разделения функций
         JPanel filePanel = createFileEncryptionPanel();
         JPanel dfilePanel = createFileDecryptionPanel();
@@ -137,9 +104,51 @@ public class Swing {
         frame.setLocationRelativeTo(null); // Центрируем окно
         frame.setVisible(true);
     }
-    // Создание экземпляра GUIView
-    GUIView guiView = new GUIView(encryptField, keyField, statusField, dictionaryField,frame);
 
+    // Создание экземпляра GUIView
+    GUIView guiView = new GUIView(encryptField, decryptField, keyField, statusField, dictionaryField, frame);
+
+    /*private static JPanel createFilePanel() {
+
+        JPanel filePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        filePanel.add(new JLabel("Файл для шифрования/дешифрования:"));
+
+        encryptField = new JTextField(30);
+        filePanel.add(encryptField);
+
+        JButton fileChooseButton = new JButton("Выбрать файл");
+        filePanel.add(fileChooseButton);
+
+        filePanel.setBackground(Color.darkGray);
+        fileChooseButton.setBackground(Color.lightGray);
+
+        // Обработчик для кнопки выбора файла
+        fileChooseButton.addActionListener(e -> {
+            Object[] options = {"Ввести вручную", "Использовать по умолчанию"};
+            int choice = JOptionPane.showOptionDialog(null,
+                    "Выберите способ ввода пути к файлу:",
+                    "Выбор файла",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[1]); // По умолчанию будет выбрана вторая опция
+
+            if (choice == JOptionPane.YES_OPTION) {
+                // Ввести вручную
+                String userInput = JOptionPane.showInputDialog("Введите путь к файлу:");
+                if (userInput != null && !userInput.trim().isEmpty()) {
+                    encryptField.setText(userInput.trim());
+                }
+            } else if (choice == JOptionPane.NO_OPTION) {
+                // Использовать путь по умолчанию
+                encryptField.setText("input.txt"); // Замените "input.txt" на ваш путь к файлу по умолчанию
+            }
+        });
+
+        return filePanel;
+    }
+*/
     private static JPanel createFileEncryptionPanel() {
         JPanel filePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         filePanel.add(new JLabel("Путь файла для шифрования:"));
@@ -205,25 +214,37 @@ public class Swing {
         dictionaryPanel.add(new JLabel("Файл словаря:"));
         dictionaryField = new JTextField(30);
         dictionaryPanel.add(dictionaryField);
+
         JButton dictionaryChooseButton = new JButton("Выбрать файл");
-        dictionaryChooseButton.setToolTipText("Выберите файл словаря, либо воспользуйтесь файлом по умолчанию (для режима анализа)");
+        dictionaryChooseButton.setToolTipText("Выберите файл словаря или используйте файл по умолчанию (dictionary.txt)");
         dictionaryPanel.add(dictionaryChooseButton);
+
         dictionaryPanel.setBackground(Color.darkGray);
         dictionaryChooseButton.setBackground(Color.darkGray);
 
         // Слушатель для кнопки выбора словаря
         dictionaryChooseButton.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File("."));
-            int result = fileChooser.showOpenDialog(null);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
-                dictionaryField.setText(selectedFile.getAbsolutePath());
+            int choice = JOptionPane.showConfirmDialog(null,
+                    "Выбрать файл из папки или использовать файл по умолчанию (dictionary.txt)?",
+                    "Выбор файла словаря",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (choice == JOptionPane.YES_OPTION) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File("."));
+                int result = fileChooser.showOpenDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    dictionaryField.setText(selectedFile.getAbsolutePath());
+                }
+            } else {
+                dictionaryField.setText("dictionary.txt"); // Устанавливаем значение по умолчанию
             }
         });
 
         return dictionaryPanel;
     }
+
     private static JPanel createKeyPanel() {
         JPanel keyPanel = new JPanel();
         keyPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -292,6 +313,8 @@ public class Swing {
         return null; // Если пользователь закрыл окно или выбор не был сделан
     }
 
+    private static String currentMode = "none";
+
     private static JPanel createButtonPanel(JFrame frame) {
 
         // Панель с кнопками
@@ -301,24 +324,28 @@ public class Swing {
 
         JButton encodeButton = new JButton("Encode");
         encodeButton.addActionListener(e -> {
+            currentMode = "1"; // Устанавливаем режим "шифрование"
             performEncryption(frame);
         });
         buttonPanel.add(encodeButton);
 
         JButton decodeButton = new JButton("Decode");
         decodeButton.addActionListener(e -> {
+            currentMode = "2"; // Устанавливаем режим "дешифрование"
             performDecryption(frame);
         });
         buttonPanel.add(decodeButton);
 
-        JButton bfButton =new JButton("BruteForce");
+        JButton bfButton = new JButton("BruteForce");
         bfButton.addActionListener(e -> {
+            currentMode = "3"; // Устанавливаем режим "BruteForce"
             performBruteForce(frame);
         });
         buttonPanel.add(bfButton);
 
         JButton BimButton = new JButton("BigramMethod");
         BimButton.addActionListener(e -> {
+            currentMode = "5"; // Устанавливаем режим "BigramMethod"
             performBigram(frame);
         });
         buttonPanel.add(BimButton);
@@ -331,31 +358,54 @@ public class Swing {
         // Устанавливаем равномерное распределение пространства
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         buttonPanel.setBackground(Color.darkGray);
-        buttonAnalyze.addActionListener(e -> performLetterSubstitution(frame));
+        buttonAnalyze.addActionListener(e -> {
+            currentMode = "4"; // Устанавливаем режим "Статистический Анализ"
+            performLetterSubstitution(frame);
+        });
         buttonPanel.add(buttonAnalyze);
 
         return buttonPanel;
     }
+
     // Метод для шифрования файла
     private static void performEncryption(JFrame frame) {
         // Получаем путь к файлу из глобальной переменной
         String filePath = encryptField.getText();
 
-        if (filePath == null || filePath.isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "Файл для шифрования не выбран!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         // Подтверждаем выбранный файл или предлагаем использовать файл по умолчанию
-        int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
-                "Путь файла для шифрования: " + filePath + "\nИспользовать этот файл?(No- файл по умолчанию)",
-                "Подтверждение файла",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
 
-        if (confirmFileChoice != JOptionPane.YES_OPTION) {
-            // Если пользователь не подтвердил файл, используем файл по умолчанию
-            filePath = "input.txt"; // Путь по умолчанию для файла шифрования
+        if (filePath == null || filePath.isEmpty()) {
+            int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
+                    "Путь файла для шифрования не выбран! Использовать файл по умолчанию?",
+                    "Ошибка",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.ERROR_MESSAGE);
+
+            if (confirmFileChoice == JOptionPane.NO_OPTION) {
+                // Обработка случая, когда выбрано "No" для использования файла по умолчанию
+                // Ваш код здесь
+            } else {
+                filePath = "input.txt";
+            }
+        } else {
+            int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
+                    "Путь файла для шифрования: " + filePath + "\nИспользовать этот файл?(No- файл по умолчанию)",
+                    "Подтверждение файла",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+
+            if (confirmFileChoice == JOptionPane.NO_OPTION) {
+                // Обработка случая, когда выбрано "No" для использования файла по умолчанию
+                filePath = "input.txt";
+            } else {
+                // Обработка случая, когда выбрано "Yes" для использования выбранного файла
+            }
         }
+
+
+
+
+
         // Запрашиваем пользователя о пути к файлу для сохранения результата
         String key = keyField.getText(); // Получаем ключ
         if (key.isEmpty()) {
@@ -414,7 +464,7 @@ public class Swing {
     private static void performDecryption(JFrame frame) {
         //String defaultFilePath = loadDefaultFilePath();
         String filePath = decryptField.getText();
-
+        /*
         if (filePath == null || filePath.isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Файл для дешифрования не выбран!", "Ошибка", JOptionPane.ERROR_MESSAGE);
             return;
@@ -430,6 +480,35 @@ public class Swing {
             // Если пользователь не подтвердил файл, используем файл по умолчанию
             filePath = "encoded.txt"; // Путь по умолчанию для файла шифрования
         }
+*/
+        if (filePath == null || filePath.isEmpty()) {
+            int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
+                    "Путь файла для дешифрования не выбран! Использовать файл по умолчанию?",
+                    "Ошибка",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.ERROR_MESSAGE);
+
+            if (confirmFileChoice == JOptionPane.NO_OPTION) {
+                // Обработка случая, когда выбрано "No" для использования файла по умолчанию
+                // Ваш код здесь
+            } else {
+                filePath = "encoded.txt";
+            }
+        } else {
+            int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
+                    "Путь файла для дешифрования: " + filePath + "\nИспользовать этот файл?(No- файл по умолчанию)",
+                    "Подтверждение файла",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+
+            if (confirmFileChoice == JOptionPane.NO_OPTION) {
+                // Обработка случая, когда выбрано "No" для использования файла по умолчанию
+                filePath = "encoded.txt";
+            } else {
+                // Обработка случая, когда выбрано "Yes" для использования выбранного файла
+            }
+        }
+
         // Получаем ключ, введенный пользователем
         String key = keyField.getText();
         if (key.isEmpty()) {
@@ -482,7 +561,7 @@ public class Swing {
     // Метод для brute_force файла
     private static void performBruteForce(JFrame frame) {
         String filePath = decryptField.getText();
-
+/*
         if (filePath == null || filePath.isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Файл для brute force анализа не выбран!", "Ошибка", JOptionPane.ERROR_MESSAGE);
             return;
@@ -497,7 +576,34 @@ public class Swing {
             // Если пользователь не подтвердил файл, используем файл по умолчанию
             filePath = "encoded.txt"; // Путь по умолчанию для файла шифрования
         }
+*/
+        if (filePath == null || filePath.isEmpty()) {
+            int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
+                    "Путь файла для дешифрования (BruteForce) не выбран! Использовать файл по умолчанию?",
+                    "Ошибка",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.ERROR_MESSAGE);
 
+            if (confirmFileChoice == JOptionPane.NO_OPTION) {
+                // Обработка случая, когда выбрано "No" для использования файла по умолчанию
+                // Ваш код здесь
+            } else {
+                filePath = "encoded.txt";
+            }
+        } else {
+            int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
+                    "Путь файла для дешифрования (BruteForce): " + filePath + "\nИспользовать этот файл?(No- файл по умолчанию)",
+                    "Подтверждение файла",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+
+            if (confirmFileChoice == JOptionPane.NO_OPTION) {
+                // Обработка случая, когда выбрано "No" для использования файла по умолчанию
+                filePath = "encoded.txt";
+            } else {
+                // Обработка случая, когда выбрано "Yes" для использования выбранного файла
+            }
+        }
         // Получаем ключ, введенный пользователем
         String key = keyField.getText();
         if (key.isEmpty()) {
@@ -551,21 +657,34 @@ public class Swing {
     }
     private static void performBigram(JFrame frame) {
         String filePath = decryptField.getText();
-
         if (filePath == null || filePath.isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "Файл для BigramMethod не выбран!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
-                "Путь файла для дешифрования (BigramMethod): " + filePath + "\nИспользовать этот файл?(No- файл по умолчанию)",
-                "Подтверждение файла",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+            int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
+                    "Путь файла для дешифрования (BigramMethod) не выбран! Использовать файл по умолчанию?",
+                    "Ошибка",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.ERROR_MESSAGE);
 
-        if (confirmFileChoice != JOptionPane.YES_OPTION) {
-            // Если пользователь не подтвердил файл, используем файл по умолчанию
-            filePath = "encoded.txt"; // Путь по умолчанию для файла шифрования
+            if (confirmFileChoice == JOptionPane.NO_OPTION) {
+                // Обработка случая, когда выбрано "No" для использования файла по умолчанию
+                // Ваш код здесь
+            } else {
+                filePath = "encoded.txt";
+            }
+        } else {
+            int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
+                    "Путь файла для дешифрования (BigramMethod): " + filePath + "\nИспользовать этот файл?(No- файл по умолчанию)",
+                    "Подтверждение файла",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+
+            if (confirmFileChoice == JOptionPane.NO_OPTION) {
+                // Обработка случая, когда выбрано "No" для использования файла по умолчанию
+                filePath = "encoded.txt";
+            } else {
+                // Обработка случая, когда выбрано "Yes" для использования выбранного файла
+            }
         }
+
         // Получаем ключ, введенный пользователем
         String key = keyField.getText();
         if (key.isEmpty()) {
@@ -622,7 +741,7 @@ public class Swing {
 
     private static void performLetterSubstitution(JFrame frame) {
         String filePath = decryptField.getText();
-
+/*
         if (filePath == null || filePath.isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Файл для Статистического анализа не выбран!", "Ошибка", JOptionPane.ERROR_MESSAGE);
             return;
@@ -636,6 +755,34 @@ public class Swing {
         if (confirmFileChoice != JOptionPane.YES_OPTION) {
             // Если пользователь не подтвердил файл, используем файл по умолчанию
             filePath = "encoded.txt"; // Путь по умолчанию для файла шифрования
+        }
+        */
+        if (filePath == null || filePath.isEmpty()) {
+            int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
+                    "Путь файла для дешифрования (StatisticalAnalysis) не выбран! Использовать файл по умолчанию?",
+                    "Ошибка",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.ERROR_MESSAGE);
+
+            if (confirmFileChoice == JOptionPane.NO_OPTION) {
+                // Обработка случая, когда выбрано "No" для использования файла по умолчанию
+                // Ваш код здесь
+            } else {
+                filePath = "encoded.txt";
+            }
+        } else {
+            int confirmFileChoice = JOptionPane.showConfirmDialog(frame,
+                    "Путь файла для дешифрования (StatisticalAnalysis): " + filePath + "\nИспользовать этот файл?(No- файл по умолчанию)",
+                    "Подтверждение файла",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+
+            if (confirmFileChoice == JOptionPane.NO_OPTION) {
+                // Обработка случая, когда выбрано "No" для использования файла по умолчанию
+                filePath = "encoded.txt";
+            } else {
+                // Обработка случая, когда выбрано "Yes" для использования выбранного файла
+            }
         }
 // Получаем ключ, введенный пользователем
         String dir = dictionaryField.getText();

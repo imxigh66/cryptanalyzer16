@@ -1,77 +1,72 @@
 package com.javarush.cryptanalyzerGirls.iablocova.services;
 
 import com.javarush.cryptanalyzerGirls.iablocova.entity.Result;
-import static com.javarush.cryptanalyzerGirls.iablocova.constants.ApplicationCompletionConstants.EXCEPTION;
+import com.javarush.cryptanalyzerGirls.iablocova.repository.ResultCode;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class BruteForce implements Function{
+import static com.javarush.cryptanalyzerGirls.iablocova.constants.CryptoAlphabet.lengthOfAlphabet;
+import static com.javarush.cryptanalyzerGirls.iablocova.constants.Paths.tmpFileForBruteForce;
+public class BruteForce implements Function {
+
+
     @Override
     public Result execute(String[] parameters) {
-        return null;
+        String fileOutputOriginal = parameters[3];
+        parameters[3] = tmpFileForBruteForce;
+
+       //перебираем ключи, сравниваем по количеству совпавших регулярок - сохраняем вариант, где наибольшее количество совпрадений
+
+        int key =0;
+        int maxMatch =0;
+        Decode decoder = new Decode();
+        for (int i = 0; i < lengthOfAlphabet; i++) {//количество возможных ключей = количеству букв в алфавите
+            parameters[2] = Integer.toString(i);
+            decoder.execute(parameters);
+
+            try {
+                File fileForMatches = new File(parameters[3]);
+                if (!fileForMatches.exists()) {
+                    fileForMatches.createNewFile();
+                }
+                String textForMatches = readTextFromFile(fileForMatches);
+
+                //ищем количество совпавших регулярок
+                if (countMatches(textForMatches) > maxMatch){  //если это количество больше прошлого макс -> сохраняем этот ключ расшифровки
+                    maxMatch = countMatches(textForMatches);
+                    key = i; // в итоге имеем ключ с наиболее подходящим шаблоном расшифровки
+                }
+
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        //выбрали подходящие параметры и дешифруем
+        parameters[2] = Integer.toString(key);
+        parameters[3] = fileOutputOriginal;
+        decoder.execute(parameters);
+
+        return new Result(ResultCode.OK);
     }
+
+    private int countMatches (String stringForMatches){
+
+        int maxLen =0; //максимальная длина совпадений
+
+        Pattern pattern = Pattern.compile("^[А-ЯЁ]{1}(,|[а-яё])*(\\s)*( [а-яё]+,?)*([\\.\\?!])$", Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(stringForMatches);
+
+        while (matcher.find()) {
+            if (matcher.group().length() > maxLen) {
+                maxLen = matcher.group().length();
+            }
+        }
+
+        return maxLen;
+    }
+
 }
-
-
-//public class BruteForce {
-//
-////    private static final CryptoAlphabet ALPHABET = new CryptoAlphabet();
-//    private static int key;
-//
-////    public static void main(String[] args) throws IOException {
-//        File file = new File("D:\\2)STUDY\\KURSOV\\proba\\proektik\\src\\services\\input.txt");
-//        FileInputStream inputStream = new FileInputStream(file);
-//        byte[] bytes = new byte[inputStream.available()];
-//        inputStream.read(bytes);
-//        inputStream.close();
-//
-//        String encryptedText = new String(bytes, StandardCharsets.UTF_8);
-//
-//        // Ввод ключа шифрования
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Введите ключ шифрования от 0 до 25:");
-//        key = scanner.nextInt();
-//        scanner.close();
-//
-//        // Расшифровка текста с указанным ключом
-//        String decryptedText = encrypt(encryptedText, key);
-//
-//        // Проверка осмысленности расшифрованного текста
-//        if (isMeaningful(decryptedText)) {
-//            // Вывод расшифрованного текста в файл
-//            File outputFile = new File("D:\\2)STUDY\\KURSOV\\proba\\proektik\\src\\services\\output.txt");
-//            try (PrintWriter writer = new PrintWriter(outputFile, StandardCharsets.UTF_8)) {
-//                writer.println("Зашифрованный текст осмысленный: " + decryptedText);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            System.out.println("Зашифрованный текст осмысленный также записан в файл output.txt");
-//        } else {
-//            System.out.println("Зашифрованный текст не осмысленный: " + decryptedText);
-//        }
-//
-//
-//    public static String encrypt( String encryptedText, int key) {
-//        StringBuilder encryptedTextBuilder = new StringBuilder();
-//        for (int i = 0; i < encryptedText.length(); i++) {
-//            char c = encryptedText.charAt(i);
-//            char base = Character.isUpperCase(c) ? 'А' : 'а';
-//            if (Character.isLetter(c) && Character.isLetter(base)) {
-//                char encryptedChar = (char) ((c - base + key + 33) % 33 + base); // 33 - количество букв в кириллице
-//                encryptedTextBuilder.append(encryptedChar);
-//            } else {
-//                encryptedTextBuilder.append(c);
-//            }
-//        }
-//        return encryptedTextBuilder.toString();
-//    }
-//
-//    private static boolean isMeaningful(String text) {
-//        return text.length() > 10 && text.contains("я") && text.contains("ты") && text.contains("это") && !text.matches("[0-9]+");
-//    }
-//}
