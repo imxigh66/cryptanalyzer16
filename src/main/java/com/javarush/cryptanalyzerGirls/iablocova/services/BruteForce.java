@@ -15,58 +15,47 @@ public class BruteForce implements Function {
 
     @Override
     public Result execute(String[] parameters) {
-        String fileOutputOriginal = parameters[3];
-        parameters[3] = tmpFileForBruteForce;
+       //перебираем ключи, сравниваем по количеству совпавших регулярок - сохраняем вариант, где нашли совпадение с регуляркой
 
-       //перебираем ключи, сравниваем по количеству совпавших регулярок - сохраняем вариант, где наибольшее количество совпрадений
-
-        int key =0;
-        int maxMatch =0;
-        Decode decoder = new Decode();
-        for (int i = 0; i < lengthOfAlphabet; i++) {//количество возможных ключей = количеству букв в алфавите
-            parameters[2] = Integer.toString(i);
-            decoder.execute(parameters);
-
-            try {
-                File fileForMatches = new File(parameters[3]);
-                if (!fileForMatches.exists()) {
-                    fileForMatches.createNewFile();
-                }
-                String textForMatches = readTextFromFile(fileForMatches);
-
-                //ищем количество совпавших регулярок
-                if (countMatches(textForMatches) > maxMatch){  //если это количество больше прошлого макс -> сохраняем этот ключ расшифровки
-                    maxMatch = countMatches(textForMatches);
-                    key = i; // в итоге имеем ключ с наиболее подходящим шаблоном расшифровки
-                }
-
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-
-        //выбрали подходящие параметры и дешифруем
+        int key = decodeAllVariants(parameters);
         parameters[2] = Integer.toString(key);
-        parameters[3] = fileOutputOriginal;
-        decoder.execute(parameters);
+        new Decode().execute(parameters);
+
+        System.out.println("Ключ шифрования = " + key);
 
         return new Result(ResultCode.OK);
     }
 
-    private int countMatches (String stringForMatches){
+    private int decodeAllVariants (String[] parameters){
+        Decode decoder = new Decode();
+        try{
+            for (int shift = 0; shift <= lengthOfAlphabet; shift++) {
+                parameters [2] = Integer.toString(shift);
+                decoder.execute(parameters);
+
+                File fileOutput = new File (parameters[3]);
+                if (!fileOutput.exists()){ fileOutput.createNewFile();}
+
+                String decryptedText = readTextFromFile(fileOutput);
+                if (isMatching(decryptedText)) return shift;
+            }} catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    private boolean isMatching (String stringForMatches){
 
         int maxLen =0; //максимальная длина совпадений
 
         Pattern pattern = Pattern.compile("^[А-ЯЁ]{1}(,|[а-яё])*(\\s)*( [а-яё]+,?)*([\\.\\?!])$", Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(stringForMatches);
 
-        while (matcher.find()) {
-            if (matcher.group().length() > maxLen) {
-                maxLen = matcher.group().length();
-            }
+        if (matcher.find()) {
+            return true;
         }
 
-        return maxLen;
+        return false;
     }
 
 }
