@@ -9,6 +9,7 @@ import com.javarush.cryptanalyzerGirls.iablocova.entity.Result;
 import com.javarush.cryptanalyzerGirls.iablocova.repository.ResultCode;
 
 import static com.javarush.cryptanalyzerGirls.iablocova.constants.CryptoAlphabet.lengthOfAlphabet;
+import static com.javarush.cryptanalyzerGirls.iablocova.constants.Paths.bigramMetPath;
 import static com.javarush.cryptanalyzerGirls.iablocova.constants.Paths.bigrams;
 
 public class BigramMethod implements Function{
@@ -55,6 +56,7 @@ public class BigramMethod implements Function{
     // Вывод всех возможных вариантов дешифровки
     private void decodeAllVariants (String[] parameters){
         Decode decoder = new Decode();
+        String groupOfDecryptedText = "";
         try{
         for (int shift = 0; shift <= lengthOfAlphabet; shift++) {
             parameters [2] = Integer.toString(shift);
@@ -64,12 +66,23 @@ public class BigramMethod implements Function{
             if (!fileOutput.exists()){ fileOutput.createNewFile();}
 
             String decryptedText = readTextFromFile(fileOutput);
-            System.out.println("Дешифрованный текст " + shift + ":");
-            System.out.println(decryptedText);
-            System.out.println(); // Добавляем пустую строку для разделения результатов
-        }} catch (IOException e) {
+            groupOfDecryptedText = appendToString (groupOfDecryptedText, decryptedText, shift);
+        }
+
+            File BigramOutput = new File (bigramMetPath);
+            if (!BigramOutput.exists()){ BigramOutput.createNewFile();}
+            rewriteTextToFile(BigramOutput, groupOfDecryptedText);
+
+        } catch (IOException e) {
         e.printStackTrace();
     }
+
+
+    }
+
+    private static String appendToString (String baseString, String whatAppend, int shift){
+        baseString = baseString + "\n"+ "Дешифрованный текст " + shift + ":" + "\n"+ whatAppend;
+        return baseString;
     }
 
     private static int chooseShift (){

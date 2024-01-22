@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff7352c2-6bb6-4a5f-a75b-cea343b42d0e" name="Changes" comment="version 8. Statistical Analisys">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/app/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/constants/FunctionCodeConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/constants/FunctionCodeConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/encoded.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/encoded.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/input.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/output.txt" afterDir="false" />
+    <list default="true" id="ff7352c2-6bb6-4a5f-a75b-cea343b42d0e" name="Changes" comment="version 9. 1, 2, 4, 6 - working functions">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/bigramMet.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/constants/Paths.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/constants/Paths.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/services/BigramMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/services/BigramMethod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/services/BruteForce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/services/BruteForce.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/tmpFileForBruteForce.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705865708293</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="version 9. 1, 2, 4, 6 - working functions">
+      <option name="closed" value="true" />
+      <created>1705908580740</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1705908580740</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -167,7 +170,8 @@
     <MESSAGE value="version 6. GUI View" />
     <MESSAGE value="version 7. Ecode Statistical" />
     <MESSAGE value="version 8. Statistical Analisys" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 8. Statistical Analisys" />
+    <MESSAGE value="version 9. 1, 2, 4, 6 - working functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 9. 1, 2, 4, 6 - working functions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

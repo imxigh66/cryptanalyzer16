@@ -9,7 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.javarush.cryptanalyzerGirls.iablocova.constants.CryptoAlphabet.lengthOfAlphabet;
-import static com.javarush.cryptanalyzerGirls.iablocova.constants.Paths.tmpFileForBruteForce;
 public class BruteForce implements Function {
 
 
