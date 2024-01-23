@@ -28,12 +28,12 @@ public class BruteForce implements Function {
     private int decodeAllVariants (String[] parameters){
         Decode decoder = new Decode();
         try{
-            for (int shift = 0; shift <= lengthOfAlphabet; shift++) {
+            File fileOutput = new File (parameters[3]);
+            if (!fileOutput.exists()){ fileOutput.createNewFile();}
+
+            for (int shift = 0; shift < lengthOfAlphabet; shift++) {
                 parameters [2] = Integer.toString(shift);
                 decoder.execute(parameters);
-
-                File fileOutput = new File (parameters[3]);
-                if (!fileOutput.exists()){ fileOutput.createNewFile();}
 
                 String decryptedText = readTextFromFile(fileOutput);
                 if (isMatching(decryptedText)) return shift;
@@ -45,14 +45,21 @@ public class BruteForce implements Function {
 
     private boolean isMatching (String stringForMatches){
 
-        int maxLen =0; //максимальная длина совпадений
+//        int maxLen =0; //максимальная длина совпадений
 
-        Pattern pattern = Pattern.compile("^[А-ЯЁ]{1}(,|[а-яё])*(\\s)*( [а-яё]+,?)*([\\.\\?!])$", Pattern.MULTILINE);
+//        Pattern pattern = Pattern.compile("^[А-ЯЁ]{1}(,|[а-яё])*(\\s)*( [а-яё]+(, )?)*([\\.\\?!])$", Pattern.MULTILINE);
+        Pattern pattern = Pattern.compile("^[А-ЯЁ]{1}(,|[а-яё])*(\\\\s)*( [а-яё]+,?)*([\\\\.\\\\?!])$", Pattern.MULTILINE);
+        //^([А-ЯЁ]{1}(,|[а-яё]))*(\\s)*( [а-яё]+)([.?!])?$
         Matcher matcher = pattern.matcher(stringForMatches);
 
         if (matcher.find()) {
             return true;
         }
+
+//        Pattern aPattern = Pattern.compile("^[А-ЯЁ]{1}(,|[а-яё])*(\\s)*( [а-яё]+,?)*([\\.\\?!])$", Pattern.MULTILINE);
+//        Matcher aMatcher = aPattern.matcher(cryptString);
+//
+//        if (aMatcher.find()) return cryptString;
 
         return false;
     }

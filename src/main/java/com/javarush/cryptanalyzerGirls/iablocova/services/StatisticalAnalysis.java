@@ -13,33 +13,34 @@ public class StatisticalAnalysis implements Function {
     public Result execute(String[] parameters) {
 
         try {
-            File fileDictionary = new File(parameters[2]);
-            if (!fileDictionary.exists()) {
-                fileDictionary.createNewFile();
-            }
-
-        convertFileToLowerCase (fileDictionary, fileDictionary);
-
             File encodedFile = new File(parameters[1]);
             if (!encodedFile.exists()) {
                 encodedFile.createNewFile();
             }
 
-            Map<Character, Integer> encodedStatistics = countCharactersInEncodedFile(encodedFile);
-
-            File dictionary = new File(parameters[2]);
-            if (!dictionary.exists()) {
-                dictionary.createNewFile();
+            File fileDictionary = new File(parameters[2]);
+            if (!fileDictionary.exists()) {
+                fileDictionary.createNewFile();
             }
-
-            Map<Character, Integer> dictionaryStatistics = countCharactersInDictionaryFile(encodedStatistics, dictionary);
-
-            makeMapsEqual(dictionaryStatistics, encodedStatistics);
 
             File decodedFile = new File(parameters[3]);
             if (!decodedFile.exists()) {
                 decodedFile.createNewFile();
             }
+
+            convertFileToLowerCase (fileDictionary, fileDictionary);
+
+
+            Map<Character, Integer> encodedStatistics = countCharactersInEncodedFile(encodedFile);
+
+//            File dictionary = new File(parameters[2]);
+//            if (!dictionary.exists()) {
+//                dictionary.createNewFile();
+//            }
+
+            Map<Character, Integer> dictionaryStatistics = countCharactersInDictionaryFile(encodedStatistics, fileDictionary);
+
+            makeMapsEqual(dictionaryStatistics, encodedStatistics);
 
             replaceCharactersFromStatistics(encodedFile, decodedFile, encodedStatistics, dictionaryStatistics);
             System.out.println("Enter the characters you want to swap or enter 'exit' to quit:");
