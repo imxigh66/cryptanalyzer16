@@ -12,7 +12,7 @@ import static com.javarush.cryptanalyzerGirls.iablocova.constants.ApplicationCom
 public class Decode implements Function{
     @Override
     public Result execute(String[] parameters) {
-        long startTime = System.currentTimeMillis();
+//        long startTime = System.currentTimeMillis();
 
         try{
             File file1 = new File(parameters[1]);
@@ -30,10 +30,10 @@ public class Decode implements Function{
             System.out.println(EXCEPTION + e.getMessage());
             return new Result(ResultCode.ERROR);
         }
-
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        System.out.println("Время работы алгоритма: "+ elapsedTime);
+//
+//        long endTime = System.currentTimeMillis();
+//        long elapsedTime = endTime - startTime;
+//        System.out.println("Время работы алгоритма: "+ elapsedTime);
 
         return new Result(ResultCode.OK);
     }

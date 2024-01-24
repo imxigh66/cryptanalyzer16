@@ -3,7 +3,7 @@ package com.javarush.cryptanalyzerGirls.iablocova;
 import com.javarush.cryptanalyzerGirls.iablocova.app.Application;
 import com.javarush.cryptanalyzerGirls.iablocova.controller.MainController;
 import com.javarush.cryptanalyzerGirls.iablocova.entity.Result;
-import com.javarush.cryptanalyzerGirls.iablocova.view.ConsoleView;
+//import com.javarush.cryptanalyzerGirls.iablocova.view.ConsoleView;
 import com.javarush.cryptanalyzerGirls.iablocova.view.GUIView;
 import com.javarush.cryptanalyzerGirls.iablocova.view.View;
 

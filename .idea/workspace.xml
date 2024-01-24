@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff7352c2-6bb6-4a5f-a75b-cea343b42d0e" name="Changes" comment="version 11. BruteForce, StatisticalAnalysis">
+    <list default="true" id="ff7352c2-6bb6-4a5f-a75b-cea343b42d0e" name="Changes" comment="version 12. Time">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/EntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/EntryPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/Swing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/Swing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/bigramMet.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/bigramMet.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/encoded.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/encoded.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/output.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/services/BruteForce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/services/BruteForce.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/services/Decode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/services/Decode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/view/ConsoleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/view/ConsoleView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/view/GUIView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzerGirls/iablocova/view/GUIView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706024112585</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="version 12. Time">
+      <option name="closed" value="true" />
+      <created>1706089077770</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1706089077770</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -192,7 +203,8 @@
     <MESSAGE value="version 9. 1, 2, 4, 6 - working functions" />
     <MESSAGE value="version 10. BigramMethod with print into a file" />
     <MESSAGE value="version 11. BruteForce, StatisticalAnalysis" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 11. BruteForce, StatisticalAnalysis" />
+    <MESSAGE value="version 12. Time" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 12. Time" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

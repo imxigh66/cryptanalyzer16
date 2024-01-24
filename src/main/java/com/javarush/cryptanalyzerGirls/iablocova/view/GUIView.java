@@ -13,8 +13,18 @@ public class GUIView implements View{
     private JTextField dictionaryField;// Поле для пути к файлу словаря
     private JFrame frame;// Главное окно приложения
     // Конструктор
+
     public GUIView(){
-         new Swing();
+        new Swing();
+        //frame=JFrame();
+        frame = new JFrame();
+        encryptField=new JTextField();
+        decryptField=new JTextField();
+        keyField = new JTextField();
+        statusField=new JTextField();
+        dictionaryField = new JTextField();
+
+
     }
 
     public GUIView(JTextField encryptField, JTextField decryptField, JTextField keyField, JTextField statusField, JTextField dictionaryField,JFrame frame) {
@@ -46,7 +56,7 @@ public class GUIView implements View{
         String targetFilePath; // Путь к целевому файлу
 
         // Определяем путь к исходному файлу в зависимости от режима
-        if (currentMode.equals("1")) {
+        if (currentMode.equals("1") || currentMode.equals("4")) {
             sourceFilePath = encryptField.getText(); // Путь к файлу для шифрования
         } else {
             sourceFilePath = decryptField.getText(); // Путь к файлу для дешифрования
@@ -54,11 +64,11 @@ public class GUIView implements View{
 
         // Запрашиваем пользователя о пути к целевому файлу
         targetFilePath = JOptionPane.showInputDialog(frame, "Введите путь к целевому файлу:");
-        if (currentMode.equals("4")) {
-            key="0";
+        if (currentMode.equals("5")) {
+            //key="0";
             dictionaryPath = "1"; // Для статистического анализа
         } else {
-            key="1";
+            //key="1";
             dictionaryPath = "0"; // Для остальных режимов
         }
 

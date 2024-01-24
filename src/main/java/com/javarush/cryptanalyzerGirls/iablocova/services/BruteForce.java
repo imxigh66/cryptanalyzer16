@@ -14,7 +14,7 @@ public class BruteForce implements Function {
 
     @Override
     public Result execute(String[] parameters) {
-        long startTime = System.currentTimeMillis();
+//        long startTime = System.currentTimeMillis();
 
        //перебираем ключи, сравниваем по количеству совпавших регулярок - сохраняем вариант, где нашли совпадение с регуляркой
 
@@ -24,9 +24,9 @@ public class BruteForce implements Function {
 
         System.out.println("Ключ шифрования = " + key);
 
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        System.out.println("Время работы алгоритма: "+ elapsedTime);
+//        long endTime = System.currentTimeMillis();
+//        long elapsedTime = endTime - startTime;
+//        System.out.println("Время работы алгоритма: "+ elapsedTime);
 
         return new Result(ResultCode.OK);
     }
