@@ -43,6 +43,8 @@ public class StatisticalAnalysis implements Function {
             makeMapsEqual(dictionaryStatistics, encodedStatistics);
 
             replaceCharactersFromStatistics(encodedFile, decodedFile, encodedStatistics, dictionaryStatistics);
+            //showEditDialog(decodedFile);
+            /*
             System.out.println("Enter the characters you want to swap or enter 'exit' to quit:");
             Scanner scanner = new Scanner(System.in);
 
@@ -77,12 +79,16 @@ public class StatisticalAnalysis implements Function {
                 swapCharactersInFile(decodedFile, sourceChar, targetChar);
                 System.out.println("Characters swapped successfully.");
             }
+            */
+
         }  catch (IOException e) {
             e.printStackTrace();
         }
 
         return new Result(ResultCode.OK);
     }
+
+
 
     //в статистическом анализе сначала надо сделать статитстику вхождения каждого символа в текст в заданном файле
     private static Map<Character, Integer> countCharactersInEncodedFile(File file) {
